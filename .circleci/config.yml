@@ -5,9 +5,12 @@ version: 2.1
 jobs:
   # -----------------First Job
   print_hello:
+    # Lets use an "Anchor" and Aliases "&" to reduce repeat codes (circleci/node:13.8.0)
+    defaults: &defaults
+
     # use the the Docker Executor
     docker:
-      # Use a light weight image
+      # Use a light weight image | we can use
       - image: circleci/node:13.8.0
       # a step that runs a simple Bash command
     steps:
@@ -15,8 +18,12 @@ jobs:
 
   #------------------- My Second-job
   print_srename:
-    docker:
-      -  image: circleci/node:13.8.0
+
+    # docker:
+    #   -  image: circleci/node:13.8.0
+
+    # Now we just use the default alias and having less repeat codes  
+      <<: *defaults
     steps:
       - run: echo jldroid25 
 
@@ -33,8 +40,11 @@ jobs:
 
   #--------------------- A Job for Sharing a File between two jobs
   engineer_job_postion_title:
-    docker:
-      - image: circleci/node:13.8.0
+
+    # docker:
+    #   - image: circleci/node:13.8.0
+
+    <<: *defaults
     steps:
     # save the data to this file/create if not exist
       - run: echo "Site Reliability Engineer" > ~/output.txt
@@ -54,8 +64,12 @@ jobs:
             - output.txt 
   # Job to print the file data
   print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
+
+    # docker:
+    #   - image: circleci/node:13.8.0
+
+
+    <<: *defaults
     steps:
       # similar to attaching a hard drive.
       #Attach_workspace: (required), Special step used to attach the workflow’s workspace to the current container. 
