@@ -36,6 +36,27 @@ jobs:
           command: | 
             echo $VIZGEN_DEVOPSRENGINEER_NAME
 
+  # A Job for Sharing File 
+  engineer_job_postion_title
+    docker:
+      - image: circleci/node:13.8.0
+      steps:
+      # save the data to this file/create if not exist
+        - run: echo "Site Reliability Engineer" > ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/output.txt
+        - persis_to_workspace:
+          root: ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/
+          paths:
+            - output.txt 
+  #
+  print_output_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/
+      - run: cat ~/output.txt
+
+
 workflows:
   #Name the workflow "welcome"
    welcome:
@@ -54,5 +75,11 @@ workflows:
           requires:
             - print_hello
 
-      # Running the ENV Var job
-      - print_env_var  
+    # Running the ENV Var job
+      - print_env_var 
+
+    # Run the  engineer_job_postion_title's job
+      - engineer_job_postion_title
+      - print_output_file:
+          requires:
+            - engineer_job_postion_title
