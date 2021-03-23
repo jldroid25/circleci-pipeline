@@ -9,24 +9,17 @@ defaults: &defaults
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-#---------------My own Jobs
 jobs:
-  # -----------------First Job
+  # -----------------First Job ---------------
   print_hello:
-    # Now we just use the default alias and having less repeat codes  
+    # Let's use the "defaults" alias above to reduce  repeat codes for docker images  
     <<: *defaults
     # a step that runs a simple Bash command
     steps:
       - run: echo hello 
   
-  
-
-  #------------------- My Second-job
+  #------------------- My Second-job ---------------
   print_srename:
-
-    # docker:
-    #   -  image: circleci/node:13.8.0
-
     # Now we just use the default alias and having less repeat codes  
     <<: *defaults
     steps:
@@ -43,12 +36,8 @@ jobs:
           command: | 
             echo $VIZGEN_DEVOPSRENGINEER_NAME
 
-  #--------------------- A Job for Sharing a File between two jobs
+  #--------------------- A Job for Sharing a File between two jobs ------------
   engineer_job_postion_title:
-
-    # docker:
-    #   - image: circleci/node:13.8.0
-
     <<: *defaults
     steps:
     # save the data to this file/create if not exist
@@ -69,11 +58,6 @@ jobs:
             - output.txt 
   # Job to print the file data
   print_output_file:
-
-    # docker:
-    #   - image: circleci/node:13.8.0
-
-
     <<: *defaults
     steps:
       # similar to attaching a hard drive.
