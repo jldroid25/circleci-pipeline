@@ -8,7 +8,7 @@ version: 2.1
 
 #My own Jobs
 jobs:
-  # First Job
+  # -----------------First Job
   print_hello:
     # use the the Docker Executor
     docker:
@@ -18,14 +18,14 @@ jobs:
     steps:
       - run: echo hello 
 
-  # Second-job
+  #------------------- Second-job
   print_srename:
     docker:
       -  image: circleci/node:13.8.0
     steps:
       - run: echo jldroid25 
 
-  # Printing Env Var in Project Setup
+  # ----------Job to Print Envir Variable's Key (not its value) once job runs
   print_env_var:
     docker:
       - image: cimg/base:2020.01
@@ -36,15 +36,25 @@ jobs:
           command: | 
             echo $VIZGEN_DEVOPSRENGINEER_NAME
 
-  # A Job for Sharing File 
+  #--------------------- A Job for Sharing a File between two jobs
   engineer_job_postion_title:
     docker:
       - image: circleci/node:13.8.0
     steps:
     # save the data to this file/create if not exist
       - run: echo "Site Reliability Engineer" > ~/output.txt
+
+      # persist_to_workspace: Special step used to persist a temporary file to be used 
+      # by another job in the workflow.
       - persist_to_workspace:
+
+        # Root: (Required), Either an absolute path or a path relative to working_directory
           root: ~/
+
+          # Path: (Required), Glob identifying file(s), or a non-glob path to a directory to 
+          # add to the shared workspace. 
+          # Interpreted as relative to the workspace root. 
+          # Must not be the workspace root itself.
           paths:
             - output.txt 
   # Job to print the file data
@@ -52,8 +62,15 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
+      # similar to attaching a hard drive.
+      #Attach_workspace: (required), Special step used to attach the workflow’s workspace to the current container. 
+      # The full contents of the workspace are downloaded and copied into the directory 
+      # the workspace is being attached at
       - attach_workspace:
+
+        # at: (required), Directory to attach the workspace to.
           at: ~/
+        # Bash command to Print the content 
       - run: cat ~/output.txt
 
 
