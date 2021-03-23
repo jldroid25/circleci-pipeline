@@ -37,7 +37,7 @@ jobs:
             echo $VIZGEN_DEVOPSRENGINEER_NAME
 
   # A Job for Sharing File 
-  engineer_job_postion_title
+  engineer_job_postion_title:
     docker:
       - image: circleci/node:13.8.0
       steps:
@@ -47,7 +47,7 @@ jobs:
           root: ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/
           paths:
             - output.txt 
-  #
+  # Job to print the file data
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
