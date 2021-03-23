@@ -28,8 +28,10 @@ jobs:
   # Printing Env Var in Project Setup
   print_env_var:
     docker:
-      - image: cimg/base:2020.01
+      #- image: cimg/base:2020.01
+      - image: alpine-latest
     steps:
+     # - checkout 
       - run:
           name: "echo an ENV var in pipeline project-setup section"
           command: | 
