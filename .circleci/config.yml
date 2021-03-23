@@ -6,14 +6,14 @@ jobs:
   # -----------------First Job
   print_hello:
     # Lets use an "Anchor" and Aliases "&" to reduce repeat codes (circleci/node:13.8.0)
-    defaults: &defaults
+  defaults: &defaults
       # use the the Docker Executor
-      docker:
-        # Use a light weight image | we can use
-        - image: circleci/node:13.8.0
-      # a step that runs a simple Bash command
-      steps:
-        - run: echo hello 
+    docker:
+      # Use a light weight image | we can use
+       - image: circleci/node:13.8.0
+    # a step that runs a simple Bash command
+    steps:
+      - run: echo hello 
 
   #------------------- My Second-job
   print_srename:
