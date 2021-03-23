@@ -42,9 +42,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
     # save the data to this file/create if not exist
-      - run: echo "Site Reliability Engineer" > ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/output.txt
+      - run: echo "Site Reliability Engineer" > ~/output.txt
       - persist_to_workspace:
-          root: ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/
+          root: ~/
           paths:
             - output.txt 
   # Job to print the file data
@@ -53,7 +53,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/
+          at: ~/
       - run: cat ~/output.txt
 
 
