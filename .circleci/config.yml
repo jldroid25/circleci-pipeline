@@ -1,12 +1,7 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-# orbs:
-#   # Declare a dependency on the welcome-orb
-#   welcome: circleci/welcome-orb@0.4.1
-# # Orchestrate or schedule a set of jobs
 
-#My own Jobs
+#---------------My own Jobs
 jobs:
   # -----------------First Job
   print_hello:
@@ -18,14 +13,14 @@ jobs:
     steps:
       - run: echo hello 
 
-  #------------------- Second-job
+  #------------------- My Second-job
   print_srename:
     docker:
       -  image: circleci/node:13.8.0
     steps:
       - run: echo jldroid25 
 
-  # ----------Job to Print Envir Variable's Key (not its value) once job runs
+  # ----------Job to Print Env Variable's Key (not its value) once job runs
   print_env_var:
     docker:
       - image: cimg/base:2020.01
@@ -73,15 +68,11 @@ jobs:
         # Bash command to Print the content 
       - run: cat ~/output.txt
 
-
+# ---------------- Workflow section ----------
 workflows:
-  #Name the workflow "welcome"
-   welcome:
-
-    # # Run the welcome/run job in its own container
+  # Name the workflow "DevOps-SRE-WF"
+   DevOps-Sre-WF:
     jobs:
-    #   - welcome/run
-
     # Run the print_hello  
       - print_hello
 
