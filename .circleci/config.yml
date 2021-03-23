@@ -6,7 +6,7 @@ jobs:
   # -----------------First Job
   print_hello:
     # Lets use an "Anchor" and Aliases "&" to reduce repeat codes (circleci/node:13.8.0)
-  defaults: &defaults
+    defaults: &defaults
       # use the the Docker Executor
     docker:
       # Use a light weight image | we can use
