@@ -43,7 +43,7 @@ jobs:
     steps:
     # save the data to this file/create if not exist
       - run: echo "Site Reliability Engineer" > ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/output.txt
-      - persis_to_workspace:
+      - persist_to_workspace:
           root: ~/Users/jimad12/Desktop/DEVOPS/Courses/CICD/circleci-pipeline/
           paths:
             - output.txt 
