@@ -23,7 +23,7 @@ jobs:
     #   -  image: circleci/node:13.8.0
 
     # Now we just use the default alias and having less repeat codes  
-      <<: *defaults
+    <<: *defaults
     steps:
       - run: echo jldroid25 
 
