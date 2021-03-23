@@ -25,6 +25,14 @@ jobs:
     steps:
       - run: echo jldroid25 
 
+  # Printing Env Var in Project Setup
+  print_env_var:
+    steps:
+      - run:
+          name: "echo an ENV var in pipeline project-setup section"
+          command: | 
+            echo $VIZGEN_DEVOPSRENGINEER_NAME
+
 workflows:
   #Name the workflow "welcome"
    welcome:
@@ -42,3 +50,6 @@ workflows:
         # for the print_hello job to finish.
           requires:
             - print_hello
+
+      # Running the ENV Var job
+      - print_env_var  
