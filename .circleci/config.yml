@@ -111,7 +111,7 @@ jobs:
     <<: *defaults
     steps:
       # return/exit with 1 to fail on purpose
-      - run: return 1
+      #- run: return 1
       - run: 
           name: on error
           command: echo "Job Error exit with 1 !"
