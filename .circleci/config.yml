@@ -82,9 +82,9 @@ jobs:
   
   # Jobs to print Pipeline_id
   sredevops_pip_id:
-  <<: *defaults
-  steps:
-    - print_pipeline_id
+    <<: *defaults
+    steps:
+      - print_pipeline_id
 
 # ---------------- Workflow section ----------
 workflows:
