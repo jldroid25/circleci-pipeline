@@ -97,11 +97,11 @@ jobs:
   #     - print_pipeline_id
 
     # Jobs to print Pipeline_id 2nd way as a parameter
-    sredevops_pip_id_2:
-      <<: *defaults
-      steps:
-        - print_pipeline_id_2:
-            id: << pipeline.id >>
+  sredevops_pip_id_2:
+    <<: *defaults
+    steps:
+      - print_pipeline_id_2:
+          id: << pipeline.id >>
 
 # ---------------- Workflow section ----------
 workflows:
