@@ -13,10 +13,10 @@ version: 2.1
 
 #----------- How to use Commands (for Reusable code & reduce code repetition)?
 # Commands are similar to functions & can be created multiple times.
-commands:
-  print_pipeline_id:
-    steps:
-      - run: echo ${CIRCLE_WORKFLOW_ID}
+# commands:
+#   print_pipeline_id:
+#     steps:
+#       - run: echo ${CIRCLE_WORKFLOW_ID}
 
 # Second way/Option for creating command  to Pass Circle_workflow_id as parameter 
 # in our  commands instead of Enviromental variable
@@ -91,10 +91,10 @@ jobs:
       - run: cat ~/output.txt
   
   # Jobs to print Pipeline_id
-  sredevops_pip_id:
-    <<: *defaults
-    steps:
-      - print_pipeline_id
+  # sredevops_pip_id:
+  #   <<: *defaults
+  #   steps:
+  #     - print_pipeline_id
 
     # Jobs to print Pipeline_id 2nd way as a parameter
     sredevops_pip_id_2:
