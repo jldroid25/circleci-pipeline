@@ -1,4 +1,5 @@
 # Lets use an "Anchor" and Aliases "&" to reduce repeat codes (circleci/node:13.8.0)
+# Note (anchors & Aliases can only be created once in your code like here)
 defaults: &defaults
   # use the the Docker Executor
   docker:
@@ -8,6 +9,14 @@ defaults: &defaults
       
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+
+# How to use Commands (for Reusable code)
+# Commands are similar to functions & can be created multiple time.
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+    
 
 jobs:
   # -----------------First Job ---------------
@@ -70,16 +79,23 @@ jobs:
           at: ~/
         # Bash command to Print the content 
       - run: cat ~/output.txt
+  
+  # Jobs to print Pipeline_id
+  sredevops_pip_id:
+  <<: *defaults
+  steps:
+    - print_pipeline_id
 
 # ---------------- Workflow section ----------
 workflows:
-  # Name the workflow "DevOps-SRE-WF"
+  # Name of the workflow "DevOps-SRE-WF"
    DevOps-Sre-WF:
+
     jobs:
     # Run the print_hello  
       - print_hello
 
-    # & print_srename
+    # Run print_srename
       - print_srename:
         # Use the requires key to make your print_srename wait
         # for the print_hello job to finish.
@@ -94,3 +110,5 @@ workflows:
       - print_output_file:
           requires:
             - engineer_job_postion_title
+    # Run sredevops_pip_id
+    sredevops_pip_id
