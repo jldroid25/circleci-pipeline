@@ -1,5 +1,6 @@
-# Lets use an "Anchor" and Aliases "&" to reduce repeat codes (circleci/node:13.8.0)
-# Note (anchors & Aliases can only be created once in your code like here)
+#---------- Lets use an "Anchor" and Aliases "&" 
+# to reduce codes (circleci/node:13.8.0) repetition
+# Note: (anchors & Aliases can only be created once in your code like here)
 defaults: &defaults
   # use the the Docker Executor
   docker:
@@ -10,14 +11,23 @@ defaults: &defaults
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# How to use Commands (for Reusable code)
-# Commands are similar to functions & can be created multiple time.
+#----------- How to use Commands (for Reusable code & reduce code repetition)?
+# Commands are similar to functions & can be created multiple times.
 commands:
   print_pipeline_id:
     steps:
       - run: echo ${CIRCLE_WORKFLOW_ID}
-    
 
+# Second way/Option for creating command  to Pass Circle_workflow_id as parameter 
+# in our  commands instead of Enviromental variable
+commands:
+  print_pipeline_id_2:
+    parameters:
+      id:
+        type: string
+    steps:
+      - run: echo << parameters.id >>
+    # ----------- Jobs Section -------------------------#
 jobs:
   # -----------------First Job ---------------
   print_hello:
@@ -85,6 +95,13 @@ jobs:
     <<: *defaults
     steps:
       - print_pipeline_id
+
+    # Jobs to print Pipeline_id 2nd way as a parameter
+    sredevops_pip_id_2:
+      <<: *defaults
+      steps:
+        - print_pipeline_id_2:
+            id: << pipeline.id >>
 
 # ---------------- Workflow section ----------
 workflows:
