@@ -12,14 +12,14 @@ defaults: &defaults
 version: 2.1
 
 #----------- How to use Commands (for Reusable code & reduce code repetition)?
-# Commands are similar to functions & can be created multiple times.
+# Commands are similar to functions.
 # commands:
 #   print_pipeline_id:
 #     steps:
 #       - run: echo ${CIRCLE_WORKFLOW_ID}
 
 # Second way/Option for creating command  to Pass Circle_workflow_id as parameter 
-# in our  commands instead of Enviromental variable
+# in our  commands instead as an Enviromental variable
 commands:
   print_pipeline_id_2:
     parameters:
@@ -27,6 +27,7 @@ commands:
         type: string
     steps:
       - run: echo << parameters.id >>
+
     # ----------- Jobs Section -------------------------#
 jobs:
   # -----------------First Job ---------------
@@ -102,6 +103,20 @@ jobs:
     steps:
       - print_pipeline_id_2:
           id: << pipeline.id >>
+  
+  # Managing Job Failures using   "when: on_fail"
+  # we can use this to send special msg, cleanup command or job,
+  # alert another service & more
+  handle_job_fails:
+    <<: *defaults
+    steps:
+      # return/exit with 1 to fail on purpose
+      - run: return 1
+      - run: 
+          name: on error
+          command: echo "Job Error exit with 1 !"
+          # Only display the command when this job fails
+          when: on_fail
 
 # ---------------- Workflow section ----------
 workflows:
@@ -133,3 +148,6 @@ workflows:
 
      # Run sredevops_pip_id
       - sredevops_pip_id_2
+
+    # run the handle_job_fails
+      -  handle_job_fails
